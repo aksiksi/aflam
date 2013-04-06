@@ -10,6 +10,16 @@ A cinema release tracker for the UAE written in Python using the [Flask](http://
 * [Flask-Mail](http://packages.python.org/flask-mail/)
 * [Flask-Bcrypt](http://pythonhosted.org/Flask-Bcrypt/)
 
+It also depends on the following libraries for certain other functions:
+
+* [Requests](http://docs.python-requests.org/en/latest/index.html)
+* [lxml](http://lxml.de)
+* [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/)
+
+`lxml` is optional, but preffered. If you do not want to use it, open `grab.py` and simply remove it as a second parameter to the two `BeautifulSoup` objects.
+
+    soup = BeautifulSoup(..., "lxml") # Remove "lxml" (and the comma, of course)
+
 ## Why?
 
 It was supposed to become a large-scale movie release tracker for the UAE, but was unfortunately an over-ambitious project from the get-go.
@@ -34,4 +44,3 @@ With the above done, the web app should run (almost) perfectly.
 # Bugs and Issues
 
 If you ever run this application and find a bug or two, don't hesitate to report it using the Issue Tracker.
-
