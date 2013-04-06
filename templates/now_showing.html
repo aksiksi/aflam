@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Now Showing{% endblock %}
+
+{% block body %}
+    <div id="content">
+        <h1>Now Showing</h1>
+    </div>
+
+    <div id="movies-full">
+        {% for m in movies %}
+            <div class="movie">
+                {% if 'http' in m.poster_url %}
+                    <a href="#"><img class="imageshadow" src="{{ m.poster_url }}" width="92" /></a>
+                {% else %}
+                    <a href="{{ m.imdb_url }}" target="_blank"><img class="imageshadow" src="http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w92/{{ m.poster_url }}"></a>
+                {% endif %}
+                <p>{{ m.title }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

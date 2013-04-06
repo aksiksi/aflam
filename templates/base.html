@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %} | Aflam</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div id="container">
+        <nav>
+            <p class="nav_title left">UAE Movies</p>
+            <a class="nav_link left" href="/">Home</a>
+            <a class="nav_link left" href="{{ url_for('now_showing') }}">Now Showing</a>
+            <a class="nav_link left" href="{{ url_for('coming_soon') }}">Coming Soon</a>
+            <a class="nav_link left" href="{{ url_for('about') }}">About</a>
+
+            {% if current_user.is_anonymous() %}
+                <a class="nav_link right login_link" href="{{ url_for('login') }}">Login/Signup</a>
+            {% else %}
+                <p class="nav_link right login_link">
+                   Hello, {{ current_user.first_name if current_user.first_name else current_user.username }}!
+                   (<a href="{{ url_for('logout') }}">logout</a>)
+                </p>
+{#                <a class="nav_link right login_link" href="#">{{  }}</a>#}
+{#                <a class="nav_link right login_link" href="{{ url_for('logout') }}">(logout)</a>#}
+            {% endif %}
+        </nav>
+    
+        <div id="flash-section">
+            <ul>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% for category, message in messages %}
+                        <li class="flash {{ category }}">{{ message|safe }}</li>
+                    {% endfor %}
+                {% endwith %}
+            </ul>
+        </div>
+
+        {% block body %}
+        {% endblock %}
+
+        <footer>
+            Created by Assil Ksiksi. Contact: cyph0nik [at] gmail [dot] com or <a href="http://twitter.com/Cyph0n">@Cyph0n</a>.
+            Movie data courtesy of <a href="http://www.voxcinemas.com">Vox Cinemas</a>.
+        </footer>
+    </div>
+</body>
+</html>

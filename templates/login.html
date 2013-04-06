@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+    <div class="left" id="form">
+        <p>Don't have an account? Then <a href="{{ url_for('signup') }}">signup</a>.</p>
+        <br>
+        <p>Can't verify your account? Visit <a href="#">this</a> page to resend the code.</p>
+        <br>
+        <form action="{{ url_for('login') }}" method="POST">
+            {{ form.hidden_tag() }}
+
+            {% for field in form %}
+                {% if field.id not in ["csrf_token", "submit"] %}
+                    <p>
+                        <dt>{{ field.label }}
+                        {% if field.type == "BooleanField" %}
+                             {{ field }}
+                             <dd>
+                                 {% if field.errors %}
+                                     <ul class="form_error">
+                                         {% for error in field.errors %}
+                                             <li>{{ error }}</li>
+                                         {% endfor %}
+                                     </ul>
+                                 {% endif %}
+                             </dd>
+                        {% else %}
+                            <dd>
+                                {{ field(size=40) }}
+                                {% if field.errors %}
+                                    <ul class="form_error">
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </dd>
+                        {% endif %}
+                    </p>
+                    <br>
+                {% endif %}
+            {% endfor %}
+
+            <button class="submit" type="submit">Log In</button>
+        </form>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Signup
+{% endblock %}
+
+{% block body %}
+    <div class="left" id="form">
+        <p>Have an account? Then <a href="{{ url_for('login') }}">login</a>.</p>
+        <br>
+        <form action="{{ url_for('signup') }}" method="POST">
+            {{ form.hidden_tag() }}
+
+            {% for field in form %}
+                {% if field.id != "csrf_token" %}
+                    <p>
+                        <dt>{{ field.label }}
+                        <dd>
+                            {% if field.id in ["first_name", "last_name"] %}
+                                {{ field(placeholder="optional", size=40) }}
+                            {% elif field.type == "RadioField" %}
+                                {% for each in field %}
+                                    {{ each }} {{ each.label }}
+                                {% endfor %}
+                            {% else %}
+                                {{ field(placeholder="required", size=40) }}
+                            {% endif %}
+
+                            {% if field.errors %}
+                                <ul class="form_error">
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </dd>
+                    </p>
+                    <br>
+                {% endif %}
+            {% endfor %}
+
+            <button type="submit" class="submit">Sign Up</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div id="content">
+        <h2>What is this?</h2>
+        <p>
+           This website tracks cinema releases in the UAE. If you want to know movie showtimes,
+           please visit <a href="http://grandcinemas.com/Grand-Homepage.aspx">Grand Cinemas</a> or
+           <a href="http://www.voxcinemas.com">Vox Cinemas</a>.
+        </p>
+    </div>
+    <div id="movies">
+        <h1>Now Showing</h1>
+        {% for m in now_showing %}
+            <div class="movie">
+                {% if 'http' in m.poster_url %}
+                    <a href="#"><img class="imageshadow" src="{{ m.poster_url }}" width="92" /></a>
+                {% else %}
+                    <a href="{{ m.imdb_url }}" target="_blank"><img class="imageshadow" src="http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w92/{{ m.poster_url }}"></a>
+                {% endif %}
+                <p>{{ m.title }}</p>
+            </div>
+        {% endfor %}
+
+            <a class="more" href="{{ url_for("now_showing") }}"><h3>More...</h3></a>
+    </div>
+    <div id="movies">
+        <h1>Coming Soon</h1>
+        {% for m in coming_soon %}
+            <div class="movie">
+                {% if 'http' in m.poster_url %}
+                    <a href="#"><img class="imageshadow" src="{{ m.poster_url }}" width="92" /></a>
+                {% else %}
+                    <a href="{{ m.imdb_url }}" target="_blank"><img class="imageshadow" src="http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w92/{{ m.poster_url }}"></a>
+                {% endif %}
+                <p>{{ m.title }}</p>
+                <p><i>{{ m.local_release_date|dateformat }}</i></p>
+            </div>
+        {% endfor %}
+
+            <a class="more" href="{{ url_for("coming_soon") }}"><h3>More...</h3></a>
+    </div>
+{% endblock %}
