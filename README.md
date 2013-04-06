@@ -2,30 +2,34 @@
 
 ## What?
 
-A cinema release tracker for the UAE written in Python using the Flask microframework. The application is **not** complete, but it does have a functioning auth system implemented using a variety of plugins, including:
+A cinema release tracker for the UAE written in Python using the [Flask](http://flask.pocoo.org/) microframework. The application is **not** complete, but it does have a functioning auth system implemented using a variety of plugins, including:
 
-* Flask-SQLAlchemy
-* Flask-WTF
-* Flask-Login
-* Flask-Mail
-* Flask-Bcrypt
+* [Flask-SQLAlchemy](http://pythonhosted.org/Flask-SQLAlchemy/)
+* [Flask-WTF](http://pythonhosted.org/Flask-WTF/)
+* [Flask-Login](http://pythonhosted.org/Flask-Login/)
+* [Flask-Mail](http://packages.python.org/flask-mail/)
+* [Flask-Bcrypt](http://pythonhosted.org/Flask-Bcrypt/)
 
 ## Why?
 
-It was supposed to become a large-scale release tracker for the UAE, but it was an over-ambitious project from the get-go.
+It was supposed to become a large-scale movie release tracker for the UAE, but was unfortunately an over-ambitious project from the get-go.
 
 ## How?
 
-*aflam* scrapes movie release info from the Vox Cinemas homepage, then processes it using **themoviedb.org**'s API. The resulting data is stored into a database table using the SQLAlchemy ORM. The final piece, the website, uses this stored data in its views and adds user accounts to the mix.
+**aflam** scrapes movie release info from the [Vox Cinemas](http://voxcinemas.com) homepage, then processes it using **themoviedb.org**'s API. The resulting data is stored into a database table using the [SQLAlchemy ORM](http://www.sqlalchemy.org/). The final piece, the website, uses this stored data in its views and adds user accounts and authentication to the mix.
 
 # Setup
 
-To run the application, you'll obviously need to install Flask and the extensions mentioned above. You'll also need to modify a few settings.
+To run the application, you'll obviously need to install Flask and the extensions mentioned above. This can be done in one step using the included `requirements.txt`.
 
-1) In `config.py`, set SQLALCHEMY_DATABASE_URI to your database's link.
-2) In `tmdb.py`, set the API_KEY to your tMDB key. Obviously, you'll need to apply for one.
+    pip install -r "requirements.txt"
 
-With the above done, the web app should run perfectly.
+You'll then need to modify a few settings.
+
+1. In `config.py`, set `SQLALCHEMY_DATABASE_URI` to your database's link.
+2. In `tmdb.py`, set `API_KEY` to your tMDB API key. Obviously, you'll need to apply for one. You can read more about it [here](http://www.themoviedb.org/documentation/api).
+
+With the above done, the web app should run (almost) perfectly.
 
 # Bugs and Issues
 
